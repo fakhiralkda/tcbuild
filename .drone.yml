@@ -27,6 +27,7 @@ steps:
   image: ubuntu:20.04
   commands:
   - cd tcbuild || exit
+  - bash ci.sh deps
   - bash build-tc.sh
   - cd ..
   - rm -rf *
