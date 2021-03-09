@@ -1,0 +1,32 @@
+kind: pipeline
+name: test-build
+
+steps:
+- name: clone-script
+  image: ubuntu:20.04
+  environment:
+    PAT:
+      from_secret: PAT
+  commands:
+  - apt update -qqy
+  - apt install -y git
+  - git clone $PAT tcbuild
+  - rm -rf .git
+
+- name: test
+  image: ubuntu:20.04
+  commands:
+  - cd tcbuild || exit
+  - bash ci.sh deps
+  - bash ci.sh llvm
+  - bash ci.sh binutils
+  - bash ci.sh kernel
+  - cd ..
+
+- name: build
+  image: ubuntu:20.04
+  commands:
+  - cd tcbuild || exit
+  - bash build-tc.sh
+  - cd ..
+  - rm -rf *
