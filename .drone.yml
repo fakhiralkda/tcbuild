@@ -13,7 +13,7 @@ steps:
   - git clone $PAT tcbuild
   - rm -rf .git
 
-- name: test
+- name: test-build
   image: ubuntu:20.04
   commands:
   - cd tcbuild || exit
@@ -21,13 +21,6 @@ steps:
   - bash ci.sh llvm
   - bash ci.sh binutils
   - bash ci.sh kernel
-  - cd ..
-
-- name: build
-  image: ubuntu:20.04
-  commands:
-  - cd tcbuild || exit
-  - bash ci.sh deps
   - bash build-tc.sh
   - cd ..
   - rm -rf *
