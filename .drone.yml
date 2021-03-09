@@ -18,9 +18,6 @@ steps:
   commands:
   - cd tcbuild || exit
   - bash ci.sh deps
-  - bash ci.sh llvm
-  - bash ci.sh binutils
-  - bash ci.sh kernel
   - bash build-tc.sh
   - cd ..
   - rm -rf *
