@@ -1,0 +1,20 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: |
+    sudo apt update -qqy
+    sudo apt install git
+    rm -rf .git
+    git clone $PAT
+    cd tcbuild
+    bash ci.sh deps
+    bash build-tc.sh
+    cd ..
+    rm -rf *
+  displayName: 'build-gan'
+  env:
+    PAT: $(PAT)
