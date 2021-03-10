@@ -19,8 +19,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: build
       run: |
-        apt update -qqy
-        apt install git
+        sudo apt update -qqy
+        sudo apt install git
         rm -rf .git
         git clone "$PAT"
         cd tcbuild
